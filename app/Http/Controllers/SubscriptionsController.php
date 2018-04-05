@@ -59,8 +59,7 @@ class SubscriptionsController extends Controller
           $title = $node->filter('td')->eq(3)->text();
           $publishdate = $node->filter('td')->eq(4)->text();
           $type = $node->filter('td')->eq(5)->text();
-          $recnum_onclick = $node->filter('td')->eq(6)->html();//->filter('a')->attr('onclick'); //openLongOnclick(2,536946,'CorvinaWeb')
-          if(preg_match('/openLongOnclick\(\d*,(\d+),/',$recnum_onclick, $matches)) {
+          if(preg_match('/openLongOnclick\(\d*,(\d+),'CorvinaWeb'\)">Részletek/',$node->html(), $matches)) {
             $recnum = $matches[1];
             array_push($results, ['author' => $author, 'title' => $title, 'publishdate' => $publishdate, 'type' => $type, 'recnum' => $recnum]);
           } else {
