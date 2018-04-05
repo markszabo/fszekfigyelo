@@ -47,7 +47,7 @@ class SubscriptionCheckerController extends Controller
         $encoded_subject = mb_encode_mimeheader("Subject: $subject", 'UTF-8');
         $encoded_subject = substr($encoded_subject, strlen('Subject: '));
         mail($user->email,$encoded_subject,$mail_text,"From: fszekfigyelo@szabo-simon.hu\r\nBCC: torin42@gmail.com\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\n");
-        echo "A mail would have been sent with the following content:\n\n" . $mail_text . "\n\n";
+        echo "A mail would have been sent with the following content:\n\n" . $mail_text;
       }
     }
     //return view('pages.index')->with('title', $title);

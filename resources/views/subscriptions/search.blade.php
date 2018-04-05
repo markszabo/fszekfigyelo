@@ -61,8 +61,12 @@
                       <td>{{$result['type']}}</td>
                       <td>
                         {!! Form::open(['action' => 'SubscriptionsController@store', 'method' => 'post']) !!}
+                          <div class="form-group">
                             {{Form::hidden('title', $result['title'])}}
+                          </div>
+                          <div class="form-group">
                             {{Form::hidden('recnum', $result['recnum'])}}
+                          </div>
                           {{Form::submit('Figyelés', ['class'=>'btn btn-primary'])}}
                         {!! Form::close() !!}
                       </td>
