@@ -9,7 +9,7 @@ I'm working on dev, pushing to staging for testing and the master branch is inst
 
 The development can be done using Docker. First setup a mysql container then the laravel app itself.
 
-### Create a docker network
+### Create a docker network
 
 ```
 docker network create fszekfigyelo_network
@@ -43,7 +43,7 @@ docker run --name=fszekfigyelo -p 8181:8181 -v ${PWD}:/app/fszekfigyelo -e USERI
 
 And fszekfigyelo should be available on http://fszekfigyelo.dev:8181/.
 
-### Stop the containers
+### Stop the containers
 
 ```
 docker stop fszekfigyelo_mysql fszekfigyelo
@@ -60,3 +60,9 @@ docker start fszekfigyelo_mysql fszekfigyelo
 ```
 docker exec -i -t fszekfigyelo /bin/bash
 ```
+
+## Links
+
+Useful links for development:
+*Testing: https://github.com/laravel/browser-kit-testing
+*PHPUnit assertions: https://phpunit.readthedocs.io/en/7.1/assertions.html
