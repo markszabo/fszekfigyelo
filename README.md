@@ -32,7 +32,7 @@ mv .env_dev .env
 #Update SQL password in .env if you used something else
 sudo sh -c 'echo "127.0.0.1 fszekfigyelo.dev" >> /etc/hosts'
 docker build --network fszekfigyelo_network -t fszekfigyelo .
-docker run --name=fszekfigyelo -p 8181:8181 -v ${PWD}:/app/fszekfigyelo --network fszekfigyelo_network -d fszekfigyelo
+docker run --name=fszekfigyelo -p 8181:8181 -v ${PWD}:/app/fszekfigyelo -e USERID=$UID --network fszekfigyelo_network -d fszekfigyelo
 ```
 
 ### Stop the containers
@@ -42,3 +42,7 @@ docker run --name=fszekfigyelo -p 8181:8181 -v ${PWD}:/app/fszekfigyelo --networ
 ### Start the containers
 
 `docker start fszekfigyelo_mysql fszekfigyelo`
+
+### Shell on the laravel container
+
+`docker exec -i -t fszekfigyelo /bin/bash`
