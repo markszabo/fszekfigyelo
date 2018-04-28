@@ -18,6 +18,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('recnum');
             $table->string('title');
             $table->integer('state_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
