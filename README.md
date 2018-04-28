@@ -64,5 +64,6 @@ docker exec -i -t fszekfigyelo /bin/bash
 ## Links
 
 Useful links for development:
-*Testing: https://github.com/laravel/browser-kit-testing
-*PHPUnit assertions: https://phpunit.readthedocs.io/en/7.1/assertions.html
+
+* Testing: https://github.com/laravel/browser-kit-testing
+* PHPUnit assertions: https://phpunit.readthedocs.io/en/7.1/assertions.html
