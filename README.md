@@ -11,17 +11,23 @@ The development can be done using Docker. First setup a mysql container then the
 
 ### Create a docker network
 
-`docker network create fszekfigyelo_network`
+```
+docker network create fszekfigyelo_network
+```
 
 ### Mysql container setup
 
 Download the container:
 
-`docker pull mysql/mysql-server:5.6`
+```
+docker pull mysql/mysql-server:5.6
+```
 
 Run the container:
 
-`docker run --name=fszekfigyelo_mysql --network fszekfigyelo_network -e MYSQL_ROOT_PASSWORD=fszekfigyelorootpass -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=fszekfigyelo -d mysql/mysql-server:5.6`
+```
+docker run --name=fszekfigyelo_mysql --network fszekfigyelo_network -e MYSQL_ROOT_PASSWORD=fszekfigyelorootpass -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=fszekfigyelo -d mysql/mysql-server:5.6
+```
 
 ### Fszekfigyelo container setup
 
@@ -35,14 +41,22 @@ docker build --network fszekfigyelo_network -t fszekfigyelo .
 docker run --name=fszekfigyelo -p 8181:8181 -v ${PWD}:/app/fszekfigyelo -e USERID=$UID --network fszekfigyelo_network -d fszekfigyelo
 ```
 
+And fszekfigyelo should be available on http://fszekfigyelo.dev:8181/.
+
 ### Stop the containers
 
-`docker stop fszekfigyelo_mysql fszekfigyelo`
+```
+docker stop fszekfigyelo_mysql fszekfigyelo
+```
 
 ### Start the containers
 
-`docker start fszekfigyelo_mysql fszekfigyelo`
+```
+docker start fszekfigyelo_mysql fszekfigyelo
+```
 
 ### Shell on the laravel container
 
-`docker exec -i -t fszekfigyelo /bin/bash`
+```
+docker exec -i -t fszekfigyelo /bin/bash
+```
