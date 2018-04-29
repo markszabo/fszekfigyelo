@@ -23,7 +23,7 @@ class SubscriptionCheckerController extends Controller
       $subscriptions = Subscription::where('user_id', $user->id)->where('state_id', '1')->get();
       foreach($subscriptions as $subscription) {
         $libraries = $this->object2array($subscription->user->libraries, 'name');
-        $url = "http://saman.fszek.hu/WebPac/CorvinaWeb?action=onelong&showtype=longlong&recnum=" . urlencode($subscription->recnum) . "&pos=1&showtype=long&showtype=cedula&showtype=marc&showtype=hunmarc&showtype=longlong";
+        $url = env("FSZEK_URL") + "WebPac/CorvinaWeb?action=onelong&showtype=longlong&recnum=" . urlencode($subscription->recnum) . "&pos=1&showtype=long&showtype=cedula&showtype=marc&showtype=hunmarc&showtype=longlong";
         $crawler = $this->client->request('GET', $url);
         $crawler = $this->client->request('GET', $url);
         $crawler->filter('table .display tbody tr')->each(function ($node) use (&$subscription, $libraries, &$mail_center, &$sendmail, $url) {

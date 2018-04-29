@@ -29,5 +29,6 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="DB_DEFAULT" value="sqlite_testing" />
         <env name="DB_CONNECTION" value="sqlite_testing"/>
+        <env name="FSZEK_URL" value="http://localhost:8082/"/>
     </php>
 </phpunit>

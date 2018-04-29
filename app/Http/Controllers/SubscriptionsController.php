@@ -51,7 +51,7 @@ class SubscriptionsController extends Controller
       ]);
       //Do the search, parse the results
       $results = array();
-      $url = "http://saman.fszek.hu/WebPac/CorvinaWeb?action=find&index0=" . urlencode($request->input('index')) . "&text0=" . urlencode($request->input('text')) . "&whichform=simplesearchpage&pagesize=1000";
+      $url = env("FSZEK_URL") . "WebPac/CorvinaWeb?action=find&index0=" . urlencode($request->input('index')) . "&text0=" . urlencode($request->input('text')) . "&whichform=simplesearchpage&pagesize=1000";
       $crawler = $this->client->request('GET', $url);
       $crawler = $this->client->request('GET', $url);
       $crawler->filter('table')->eq(1)->filter('tr.short_item_block')->each(function ($node) use (&$results){
