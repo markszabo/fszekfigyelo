@@ -19,7 +19,8 @@
         "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~6.0",
         "symfony/thanks": "^1.0",
-        "laravel/browser-kit-testing":"~2.0"
+        "laravel/browser-kit-testing":"~2.0",
+        "internations/http-mock":"^0.10.1"
     },
     "autoload": {
         "classmap": [

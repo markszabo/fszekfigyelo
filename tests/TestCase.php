@@ -8,5 +8,5 @@ use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
-    public $baseUrl = 'http://fszekfigyelo.dev:8181/';
+    public $baseUrl = 'http://fszekfigyelo.dev:8181';
 }

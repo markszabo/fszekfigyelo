@@ -234,4 +234,5 @@ return [
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
     ],
 
+    'fszek_url' => env('FSZEK_URL', 'http://saman.fszek.hu/'),
 ];

@@ -67,3 +67,4 @@ Useful links for development:
 
 * Testing: https://github.com/laravel/browser-kit-testing
 * PHPUnit assertions: https://phpunit.readthedocs.io/en/7.1/assertions.html
+* http-mock: https://github.com/InterNations/http-mock (used to setup a mock http server for testing to be used instead of the real http://saman.fszek.hu)
