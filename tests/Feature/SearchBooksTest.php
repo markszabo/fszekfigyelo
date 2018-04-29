@@ -61,7 +61,7 @@ class ManageSubscriptionTest extends TestCase
            ->see('Keresőkifejezés');
     }
 
-    public function testSearch1()
+    public function testSearch_title_gyuruk_ura()
     {
       $this->http->mock
           ->when()
@@ -82,7 +82,7 @@ class ManageSubscriptionTest extends TestCase
            ->dontSee('<pre>');
     }
 
-    public function testSearch2()
+    public function testSearch_author()
     {
       $this->http->mock
           ->when()
@@ -100,6 +100,70 @@ class ManageSubscriptionTest extends TestCase
            ->select('AUTH','index')
            ->press('Keresés')
            ->see('The Martian')
+           ->see('Figyelés')
+           ->dontSee('<pre>');
+    }
+
+    public function testSearch_title_harry_potter()
+    {
+      $this->http->mock
+          ->when()
+              ->methodIs('GET')
+              ->pathIs($this->http->matches->regex('/WebPac\/CorvinaWeb\?.*harry.potter/'))
+          ->then()
+              ->body(file_get_contents(dirname(__FILE__) . "/mocked_websites/harry_potter_search_results.txt"))
+          ->end();
+      $this->http->setUp();
+
+      $user = factory(\App\User::class)->create();
+      $this->actingAs($user)
+           ->visit('/subscriptions/create')
+           ->type('harry potter', 'text')
+           ->press('Keresés')
+           ->see('Harry Potter and the Order of the Phoenix')
+           ->see('Figyelés')
+           ->dontSee('<pre>');
+    }
+
+    public function testSearch_no_result()
+    {
+      $this->http->mock
+          ->when()
+              ->methodIs('GET')
+              ->pathIs($this->http->matches->regex('/WebPac\/CorvinaWeb\?.*this.does.not.exist/'))
+          ->then()
+              ->body(file_get_contents(dirname(__FILE__) . "/mocked_websites/no_result_search_results.txt"))
+          ->end();
+      $this->http->setUp();
+
+      $user = factory(\App\User::class)->create();
+      $this->actingAs($user)
+           ->visit('/subscriptions/create')
+           ->type('this does not exist', 'text')
+           ->press('Keresés')
+           ->see('Nincs találat, próbáld újra')
+           ->dontSee('Figyelés')
+           ->dontSee('<pre>');
+    }
+
+    public function testSearch_publisher()
+    {
+      $this->http->mock
+          ->when()
+              ->methodIs('GET')
+              ->pathIs($this->http->matches->regex('/WebPac\/CorvinaWeb\?.*libri/'))
+          ->then()
+              ->body(file_get_contents(dirname(__FILE__) . "/mocked_websites/libri_search_results.txt"))
+          ->end();
+      $this->http->setUp();
+
+      $user = factory(\App\User::class)->create();
+      $this->actingAs($user)
+           ->visit('/subscriptions/create')
+           ->type('libri', 'text')
+           ->select('PUBL','index')
+           ->press('Keresés')
+           ->see('Zöldségtermesztés')
            ->see('Figyelés')
            ->dontSee('<pre>');
     }
