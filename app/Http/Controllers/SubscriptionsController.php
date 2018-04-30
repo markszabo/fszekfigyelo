@@ -116,7 +116,7 @@ class SubscriptionsController extends Controller
         $subscription = Subscription::find($id);
 
         //Check for the correct user
-        if(auth()->user()->id !== $subscription->user_id){
+        if((string)auth()->user()->id !== (string)$subscription->user_id){ //casting to string seems unnecessary, but otherwise strict comparison failed in testing (althoguh it worked in prod)
           return redirect('/home')->with('error','Unauthorized action');
         }
 
@@ -154,7 +154,7 @@ class SubscriptionsController extends Controller
       $subscription = Subscription::find($id);
 
       //Check for the correct user
-      if(auth()->user()->id !== $subscription->user_id){
+      if((string)auth()->user()->id !== (string)$subscription->user_id){ //casting to string seems unnecessary, but otherwise strict comparison failed in testing (althoguh it worked in prod)
         return redirect('/home')->with('error','Unauthorized action');
       }
 

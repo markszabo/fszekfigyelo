@@ -67,7 +67,7 @@
                           <div class="form-group">
                             {{Form::hidden('recnum', $result['recnum'])}}
                           </div>
-                          {{Form::submit('Figyelés', ['class'=>'btn btn-primary'])}}
+                          {{Form::submit('Figyelés', ['class'=>'btn btn-primary', 'id' => $result['recnum']])}}
                         {!! Form::close() !!}
                       </td>
                     </tr>

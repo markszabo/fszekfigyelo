@@ -36,6 +36,6 @@ class User extends Authenticatable
     }
     public function subscriptions()
     {
-        return $this->belongsToMany('App\Subscription');
+        return $this->hasMany('App\Subscription');
     }
 }
