@@ -45,12 +45,20 @@
               @if(isset($results))
                 <hr>
                 @if(count($results) > 0)
-                <table class="table table-striped">
+                {!! Form::open(['action' => 'SubscriptionsController@store', 'method' => 'post']) !!}
+                <div class="form-group">
+                {{Form::submit('A kiválasztottak figyelése', ['class'=>'btn btn-primary pull-right', 'id' => 'subscribeToMany', 'name' => 'subscribeToMany', 'disabled' => 'disabled'])}}
+              </div>
+                @php
+                  $i=0;
+                @endphp
+                <table class="table table-striped" id="searchresult">
                   <tr>
                     <th>Szerző</th>
                     <th>Cím</th>
                     <th>Dátum</th>
                     <th>Típus</th>
+                    <th></th>
                     <th></th>
                   </tr>
                   @foreach($results as $result)
@@ -60,19 +68,26 @@
                       <td>{{$result['publishdate']}}</td>
                       <td>{{$result['type']}}</td>
                       <td>
-                        {!! Form::open(['action' => 'SubscriptionsController@store', 'method' => 'post']) !!}
                           <div class="form-group">
-                            {{Form::hidden('title', $result['title'])}}
+                            {{Form::hidden('title_'.$i, $result['title'])}}
                           </div>
                           <div class="form-group">
-                            {{Form::hidden('recnum', $result['recnum'])}}
+                            {{Form::hidden('recnum_'.$i, $result['recnum'])}}
                           </div>
-                          {{Form::submit('Figyelés', ['class'=>'btn btn-primary', 'id' => $result['recnum']])}}
-                        {!! Form::close() !!}
+                          <div class="form-group">
+                            {{ Form::checkbox('subscribes['.$i.']', $i) }}
+                          </div>
+                      </td>
+                      <td>
+                          {{Form::button('Figyelés', ['class'=>'btn btn-primary subscribeToOne', 'id' => $result['recnum'], 'value' => $i, 'name' => 'subscribeToOne', 'type' => 'submit'])}}
                       </td>
                     </tr>
+                    @php
+                      $i++;
+                    @endphp
                   @endforeach
                   </table>
+                  {!! Form::close() !!}
                 @else
                 Nincs találat, próbáld újra
                 @endif
@@ -81,4 +96,24 @@
       </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+  $('#searchresult tr').click(function(event) {
+    if (event.target.type !== 'checkbox') {
+      $(':checkbox', this).trigger('click');
+    }
+  });
+  $(':checkbox').change(function(){ //change
+    if ($(':checkbox:checked').length == 0) { //no checkbox checked
+      $('#subscribeToMany').attr("disabled", "disabled");
+      $('.subscribeToOne').removeAttr("disabled");
+      console.log('no checkbox');
+    } else { //at least one checkbox is checked
+      $('.subscribeToOne').attr("disabled", "disabled");
+      $('#subscribeToMany').removeAttr("disabled");
+      console.log('some checkbox');
+    }
+  });
+});
+</script>
 @endsection

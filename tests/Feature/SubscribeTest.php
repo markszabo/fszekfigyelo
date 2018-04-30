@@ -52,7 +52,7 @@ class SubscribeTest extends TestCase
         $this->assertSame('mocked body', file_get_contents(env("FSZEK_URL") . 'foo'));
     }
 
-    public function testSubscribeMartian()
+    public function testSubscribeSingle()
     {
       $this->http->mock
           ->when()
@@ -79,6 +79,41 @@ class SubscribeTest extends TestCase
       //These checks the same just different way to preserv the intended data structure
       $this->assertEquals('1269697', $user->subscriptions->first()->recnum);
       $this->assertEquals('1269697', Subscription::where('user_id', auth()->user()->id)->first()->recnum);
+    }
+
+    public function testSubscribeMultiple()
+    {
+      $this->http->mock
+          ->when()
+              ->methodIs('GET')
+              ->pathIs($this->http->matches->regex('/WebPac\/CorvinaWeb\?.*(Andy.Weir|AUTH).*(Andy.Weir|AUTH)/'))
+          ->then()
+              ->body(file_get_contents(dirname(__FILE__) . "/mocked_websites/Andy_Weir_search_results.txt"))
+          ->end();
+      $this->http->setUp();
+
+      $user = factory(\App\User::class)->create();
+      $this->actingAs($user)
+           ->visit('/subscriptions/create')
+           ->type('Andy Weir', 'text')
+           ->select('AUTH','index')
+           ->press('Keresés')
+           ->see('The Martian')
+           ->see('Figyelés')
+           ->check('subscribes[1]') //The Martian
+           ->check('subscribes[2]') //Artemis
+           ->press('A kiválasztottak figyelése')
+           ->see('The Martian')
+           ->see('Artemis')
+           ->see('Figyelés folyamatban')
+           ->dontSee('Még nincsen feliratkozásod.');
+
+      $subscriptions = [];
+      foreach($user->subscriptions()->get() as $sub)
+        array_push($subscriptions, $sub->recnum);
+      $this->assertContains('1269697', $subscriptions);
+      $this->assertContains('1263824', $subscriptions);
+      $this->assertEquals(2,count($subscriptions));
     }
 
     public function testSubscriptionsDisplayed()
