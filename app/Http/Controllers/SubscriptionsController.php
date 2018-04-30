@@ -78,19 +78,29 @@ class SubscriptionsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
           'title' => 'required',
           'recnum' => 'required|integer'
-        ]);
-
-        //Create post
-        $subscription = new Subscription;
-        $subscription->title = $request->input('title');
-        $subscription->recnum = $request->input('recnum');
-        $subscription->user_id = auth()->user()->id;
-        $subscription->state_id = 1;
-        $subscription->save();
-
+        ]);*/
+        if($request->input('subscribeToOne')) {
+          $id = intval($request->input('subscribeToOne'));
+          $subscription = new Subscription;
+          $subscription->title = $request->input('title_'.$id);
+          $subscription->recnum = $request->input('recnum_'.$id);
+          $subscription->user_id = auth()->user()->id;
+          $subscription->state_id = 1;
+          $subscription->save();
+        } else { //subscribe to multiple 
+          foreach($request->subscribes as $sub_id) {
+            $id = intval($sub_id);
+            $subscription = new Subscription;
+            $subscription->title = $request->input('title_'.$id);
+            $subscription->recnum = $request->input('recnum_'.$id);
+            $subscription->user_id = auth()->user()->id;
+            $subscription->state_id = 1;
+            $subscription->save();
+          }
+        }
         return redirect('/home')->with('success','Feliratkozás létrehozva');
     }
 
