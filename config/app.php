@@ -180,6 +180,7 @@ return [
         //Custom
         Collective\Html\HtmlServiceProvider::class,
         Weidner\Goutte\GoutteServiceProvider::class,
+        Ixudra\Curl\CurlServiceProvider::class,
     ],
 
     /*
@@ -232,6 +233,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Goutte' => Weidner\Goutte\GoutteFacade::class,
+        'Curl' => Ixudra\Curl\Facades\Curl::class,
+
     ],
 
     'fszek_url' => env('FSZEK_URL', 'http://saman.fszek.hu/'),
