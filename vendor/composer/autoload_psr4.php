@@ -44,6 +44,7 @@ return array(
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Laravel\\Tinker\\' => array($vendorDir . '/laravel/tinker/src'),
     'Laravel\\BrowserKitTesting\\' => array($vendorDir . '/laravel/browser-kit-testing/src'),
+    'Ixudra\\Curl\\' => array($vendorDir . '/ixudra/curl/src'),
     'InterNations\\Component\\HttpMock\\' => array($vendorDir . '/internations/http-mock/src'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
