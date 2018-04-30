@@ -1,4 +1,4 @@
-FROM php:7
+FROM php:7.1
 RUN apt-get update -y && apt-get install -y openssl zip unzip git libcurl3-dev sqlite3 libsqlite3-dev libbz2-dev libxml2-dev
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN docker-php-ext-install bz2 pdo mbstring curl pdo_mysql tokenizer xml ctype json
