@@ -18,6 +18,9 @@ class CreateStatesTable extends Migration
             $table->string('description');
             $table->timestamps();
         });
+        DB::statement("INSERT INTO states (id, description) VALUES " .
+                      "(1,'Figyelés folyamatban')," .
+                      "(2,'Figyelés felfüggesztve')");
     }
 
     /**

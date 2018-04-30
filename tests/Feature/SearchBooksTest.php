@@ -50,6 +50,7 @@ class ManageSubscriptionTest extends TestCase
 
         $this->assertSame('mocked body', file_get_contents(env("FSZEK_URL") . 'foo'));
     }
+    
     public function testSubscriptionSeachAvailable()
     {
       $user = factory(\App\User::class)->create();

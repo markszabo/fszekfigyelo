@@ -49,7 +49,7 @@
                           <td>
                             {!!Form::open(['action' => ['SubscriptionsController@destroy', $subscription->id], 'method' => 'POST'])!!}
                               {{Form::hidden('_method','DELETE')}}
-                              {{Form::submit('Törlés', ['class'=>'btn btn-danger'])}}
+                              {{Form::submit('Törlés', ['class'=>'btn btn-danger', 'id' => $subscription->id])}}
                             {!!Form::close()!!}
                           </td>
                         </tr>
