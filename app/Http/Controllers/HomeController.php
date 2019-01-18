@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $libraries = Library::all();
-        $subscriptions = Subscription::where('user_id', auth()->user()->id)->orderBy('created_at','desc')->paginate(10);
+        $subscriptions = Subscription::where('user_id', auth()->user()->id)->orderBy('created_at','desc')->paginate(100);
         return view('home')->with(['libraries' => $libraries, 'subscriptions' => $subscriptions]);
     }
 
